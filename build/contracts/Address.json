@@ -11,21 +11,14 @@
   "ast": {
     "absolutePath": "openzeppelin-solidity/contracts/utils/Address.sol",
     "exportedSymbols": {
-      "Address": [
-        1837
-      ]
+      "Address": [1837]
     },
     "id": 1838,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 1764,
-        "literals": [
-          "solidity",
-          "^",
-          "0.5",
-          ".5"
-        ],
+        "literals": ["solidity", "^", "0.5", ".5"],
         "nodeType": "PragmaDirective",
         "src": "0:23:15"
       },
@@ -36,9 +29,7 @@
         "documentation": "@dev Collection of functions related to the address type",
         "fullyImplemented": true,
         "id": 1837,
-        "linearizedBaseContracts": [
-          1837
-        ],
+        "linearizedBaseContracts": [1837],
         "name": "Address",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -49,9 +40,7 @@
               "src": "623:731:15",
               "statements": [
                 {
-                  "assignments": [
-                    1772
-                  ],
+                  "assignments": [1772],
                   "declarations": [
                     {
                       "constant": false,
@@ -86,9 +75,7 @@
                   "src": "1062:16:15"
                 },
                 {
-                  "assignments": [
-                    1775
-                  ],
+                  "assignments": [1775],
                   "declarations": [
                     {
                       "constant": false,
@@ -710,10 +697,7 @@
                       "id": 1810,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        1855,
-                        1856
-                      ],
+                      "overloadedDeclarations": [1855, 1856],
                       "referencedDeclaration": 1856,
                       "src": "2726:7:15",
                       "typeDescriptions": {
@@ -740,10 +724,7 @@
                   "src": "2726:73:15"
                 },
                 {
-                  "assignments": [
-                    1821,
-                    null
-                  ],
+                  "assignments": [1821, null],
                   "declarations": [
                     {
                       "constant": false,
@@ -949,10 +930,7 @@
                       "id": 1830,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        1855,
-                        1856
-                      ],
+                      "overloadedDeclarations": [1855, 1856],
                       "referencedDeclaration": 1856,
                       "src": "2925:7:15",
                       "typeDescriptions": {
@@ -1069,21 +1047,14 @@
   "legacyAST": {
     "absolutePath": "openzeppelin-solidity/contracts/utils/Address.sol",
     "exportedSymbols": {
-      "Address": [
-        1837
-      ]
+      "Address": [1837]
     },
     "id": 1838,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 1764,
-        "literals": [
-          "solidity",
-          "^",
-          "0.5",
-          ".5"
-        ],
+        "literals": ["solidity", "^", "0.5", ".5"],
         "nodeType": "PragmaDirective",
         "src": "0:23:15"
       },
@@ -1094,9 +1065,7 @@
         "documentation": "@dev Collection of functions related to the address type",
         "fullyImplemented": true,
         "id": 1837,
-        "linearizedBaseContracts": [
-          1837
-        ],
+        "linearizedBaseContracts": [1837],
         "name": "Address",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -1107,9 +1076,7 @@
               "src": "623:731:15",
               "statements": [
                 {
-                  "assignments": [
-                    1772
-                  ],
+                  "assignments": [1772],
                   "declarations": [
                     {
                       "constant": false,
@@ -1144,9 +1111,7 @@
                   "src": "1062:16:15"
                 },
                 {
-                  "assignments": [
-                    1775
-                  ],
+                  "assignments": [1775],
                   "declarations": [
                     {
                       "constant": false,
@@ -1768,10 +1733,7 @@
                       "id": 1810,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        1855,
-                        1856
-                      ],
+                      "overloadedDeclarations": [1855, 1856],
                       "referencedDeclaration": 1856,
                       "src": "2726:7:15",
                       "typeDescriptions": {
@@ -1798,10 +1760,7 @@
                   "src": "2726:73:15"
                 },
                 {
-                  "assignments": [
-                    1821,
-                    null
-                  ],
+                  "assignments": [1821, null],
                   "declarations": [
                     {
                       "constant": false,
@@ -2007,10 +1966,7 @@
                       "id": 1830,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        1855,
-                        1856
-                      ],
+                      "overloadedDeclarations": [1855, 1856],
                       "referencedDeclaration": 1856,
                       "src": "2925:7:15",
                       "typeDescriptions": {
