@@ -2,3 +2,4 @@ cryptomons_dapp/
 cryptomons_backend/
 node_modules/
 .vscode/
+node_modules

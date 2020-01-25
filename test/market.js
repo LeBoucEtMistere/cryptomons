@@ -16,11 +16,11 @@ contract("Market test", async accounts => {
     expect(cmc).to.equal(cryptomon.address);
   });
 
-  it("should let user sell valid token", async () => {
+  it("should let user list a valid token on market", async () => {
     const tokenId = 1;
     const value = 10000;
     await cryptomon.approve(market.address, tokenId, { from: minter });
-    const tx = await market.sell(tokenId, value);
+    const tx = await market.listToken(tokenId, value);
     var soldTokens = await market.getListedTokens.call({ from: minter });
     soldTokens = soldTokens.map(x => parseInt(x, 10));
     expect(soldTokens).to.deep.equal([1]);
@@ -30,25 +30,25 @@ contract("Market test", async accounts => {
     expect(parseInt(tx.logs[0].args._tokenId, 10)).to.equal(tokenId);
   });
 
-  it("should not let user sell token that market is not approved on", async () => {
+  it("should not let user list a token that market is not approved on", async () => {
     try {
-      await market.sell(1, 10000, { from: minter });
+      await market.listToken(1, 10000, { from: minter });
     } catch (error) {
       expect(error).to.include("The Market is not approved for this token");
     }
   });
 
-  it("should not let user sell token they do not own", async () => {
+  it("should not let user list a token they do not own", async () => {
     const tokenId = 1;
     await cryptomon.approve(market.address, tokenId, { from: minter });
     try {
-      await market.sell(1, 10000, { from: receiver });
+      await market.listToken(1, 10000, { from: receiver });
     } catch (error) {
       expect(error.message).to.include("Trying to sell a token you do not own");
     }
   });
 
-  it("should let user buy valid token", async () => {
+  it("should let user buy a valid token", async () => {
     const tokenId = 1;
     const value = 100;
 
@@ -59,8 +59,8 @@ contract("Market test", async accounts => {
     const tx1 = await cryptomon.approve(market.address, tokenId, {
       from: minter
     });
-    const tx2 = await market.sell(tokenId, value, { from: minter });
-    const tx3 = await market.buy.sendTransaction(tokenId, {
+    const tx2 = await market.listToken(tokenId, value, { from: minter });
+    const tx3 = await market.buyToken.sendTransaction(tokenId, {
       value: value,
       from: receiver
     });
@@ -79,9 +79,7 @@ contract("Market test", async accounts => {
 
     // check for balances evolution
     expect(new_seller_balance - seller_balance).to.equal(seller_diff);
-    expect(new_buyer_balance - buyer_balance)
-      .to.be.lte(buyer_diff)
-      .and.to.be.gte(buyer_diff - 2300 * gasPrice);
+    expect(new_buyer_balance - buyer_balance).to.be.lte(buyer_diff);
 
     // check for event emission
     expect(tx3.logs[0].event).to.equal("Sold");
@@ -95,12 +93,12 @@ contract("Market test", async accounts => {
     const tokenId = 2;
     const value = 10000;
     await cryptomon.approve(market.address, tokenId, { from: minter });
-    await market.sell(tokenId, value);
+    await market.listToken(tokenId, value);
     await cryptomon.safeTransferFrom(minter, receiver, tokenId, {
       from: minter
     });
     try {
-      await market.buy.sendTransaction(tokenId, {
+      await market.buyToken.sendTransaction(tokenId, {
         value: value,
         from: receiver
       });
@@ -116,9 +114,9 @@ contract("Market test", async accounts => {
     const price = 10000;
     const value = 100;
     await cryptomon.approve(market.address, tokenId, { from: minter });
-    await market.sell(tokenId, price);
+    await market.listToken(tokenId, price);
     try {
-      await market.buy.sendTransaction(tokenId, {
+      await market.buyToken.sendTransaction(tokenId, {
         value: value,
         from: receiver
       });
@@ -133,7 +131,7 @@ contract("Market test", async accounts => {
     const balance = receiver.balance;
     await cryptomon.approve(market.address, tokenId, { from: minter });
     try {
-      await market.buy.sendTransaction(tokenId, {
+      await market.buyToken.sendTransaction(tokenId, {
         value: value,
         from: receiver
       });
@@ -146,7 +144,7 @@ contract("Market test", async accounts => {
     const tokenId = 4;
     const value = 10000;
     await cryptomon.approve(market.address, tokenId, { from: minter });
-    await market.sell(tokenId, value);
+    await market.listToken(tokenId, value);
     const tokenPrice = await market.getTokenPrice(tokenId, {
       from: receiver
     });

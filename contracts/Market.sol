@@ -41,7 +41,7 @@ contract Market is ERC721Holder, Ownable {
         return sellers[tokenId].price;
     }
 
-    function sell(uint256 tokenId, uint256 price) public {
+    function listToken(uint256 tokenId, uint256 price) public {
         require(CMCisSet, "The CMContract address has not been set properly");
         require(
             CMContract.getApproved(tokenId) == address(this),
@@ -66,7 +66,7 @@ contract Market is ERC721Holder, Ownable {
         listedTokens.length--;
     }
 
-    function buy(uint256 tokenId) public payable {
+    function buyToken(uint256 tokenId) public payable {
         require(sellers[tokenId].isSet, "This token is not listed for sale");
         require(msg.value >= sellers[tokenId].price, "money < price");
         CMContract.safeTransferFrom(
