@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@truffle/contract": "^4.1.5",
+    "openzeppelin-solidity": "^2.4.0",
+    "truffle-hdwallet-provider": "^1.0.17"
+  },
+  "name": "cryptomon",
+  "version": "1.0.0",
+  "description": "cryptomon",
+  "main": "src/index.js",
+  "author": "Arthur Depasse",
+  "license": "MIT"
+}
