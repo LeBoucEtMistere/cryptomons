@@ -25,6 +25,8 @@
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 var HDWalletProvider = require("truffle-hdwallet-provider");
+var NonceTrackerSubprovider = require("web3-provider-engine/subproviders/nonce-tracker");
+
 var mnemonic =
   "vicious lake cinnamon clump brain solid code alter much evoke fox foil";
 
@@ -68,14 +70,18 @@ module.exports = {
     },
     rinkeby: {
       provider: function() {
-        return new HDWalletProvider(
+        var wallet = new HDWalletProvider(
           mnemonic,
           "https://rinkeby.infura.io/v3/f342b3e3678e4d5bb23b3c1dd8f13c75"
         );
+        var nonceTracker = new NonceTrackerSubprovider();
+        wallet.engine._providers.unshift(nonceTracker);
+        nonceTracker.setEngine(wallet.engine);
+        return wallet;
       },
       network_id: 4,
-      gas: 4500000,
-      gasPrice: 10000000000
+      gas: 5000000,
+      gasPrice: 20000000000
     }
     // Another network with more advanced options...
     // advanced: {

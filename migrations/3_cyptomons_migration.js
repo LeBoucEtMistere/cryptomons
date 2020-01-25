@@ -10,7 +10,9 @@ module.exports = async function(deployer, network, accounts) {
   minter_address = accounts[0];
 
   // deploy the token contract
-  await deployer.deploy(Cryptomon, { from: minter_address });
+  await deployer.deploy(Cryptomon, marketplace_contract, {
+    from: minter_address
+  });
   const cryptomonC = await Cryptomon.deployed();
 
   const market = await Market.deployed();

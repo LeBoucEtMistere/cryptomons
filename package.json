@@ -2,7 +2,8 @@
   "dependencies": {
     "@truffle/contract": "^4.1.5",
     "openzeppelin-solidity": "^2.4.0",
-    "truffle-hdwallet-provider": "^1.0.17"
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3-provider-engine": "^15.0.4"
   },
   "name": "cryptomon",
   "version": "1.0.0",

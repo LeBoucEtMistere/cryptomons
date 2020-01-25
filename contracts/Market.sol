@@ -44,17 +44,23 @@ contract Market is ERC721Holder, Ownable {
     function listToken(uint256 tokenId, uint256 price) public {
         require(CMCisSet, "The CMContract address has not been set properly");
         require(
-            CMContract.getApproved(tokenId) == address(this),
+            CMContract.getApproved(tokenId) == address(this) ||
+                CMContract.ownerOf(tokenId) == address(this),
             "The Market is not approved for this token"
         );
         require(
-            msg.sender == CMContract.ownerOf(tokenId),
+            msg.sender == CMContract.ownerOf(tokenId) ||
+                CMContract.ownerOf(tokenId) == address(this),
             "Trying to sell a token you do not own"
         );
         if (!sellers[tokenId].isSet) {
             listedTokens.push(tokenId);
         }
-        sellers[tokenId] = SellerInfo(msg.sender, price, true);
+        if (CMContract.ownerOf(tokenId) == address(this)) {
+            sellers[tokenId] = SellerInfo(address(0), price, true);
+        } else {
+            sellers[tokenId] = SellerInfo(msg.sender, price, true);
+        }
 
         emit Listed(msg.sender, price, tokenId);
     }
@@ -69,18 +75,30 @@ contract Market is ERC721Holder, Ownable {
     function buyToken(uint256 tokenId) public payable {
         require(sellers[tokenId].isSet, "This token is not listed for sale");
         require(msg.value >= sellers[tokenId].price, "money < price");
-        CMContract.safeTransferFrom(
-            sellers[tokenId].seller,
-            msg.sender,
-            tokenId
-        );
-        sellers[tokenId].seller.transfer(sellers[tokenId].price);
-        emit Sold(
-            sellers[tokenId].seller,
-            msg.sender,
-            sellers[tokenId].price,
-            tokenId
-        );
+        if (sellers[tokenId].seller == address(0)) {
+            CMContract.safeTransferFrom(address(this), msg.sender, tokenId);
+            //owner().transfer(sellers[tokenId].price);
+            emit Sold(
+                address(this),
+                msg.sender,
+                sellers[tokenId].price,
+                tokenId
+            );
+        } else {
+            CMContract.safeTransferFrom(
+                sellers[tokenId].seller,
+                msg.sender,
+                tokenId
+            );
+            sellers[tokenId].seller.transfer(sellers[tokenId].price);
+            emit Sold(
+                sellers[tokenId].seller,
+                msg.sender,
+                sellers[tokenId].price,
+                tokenId
+            );
+        }
+
         sellers[tokenId] = SellerInfo(address(0), 0, false);
         for (uint256 i = 0; i < listedTokens.length; i++) {
             if (listedTokens[i] == tokenId) {
