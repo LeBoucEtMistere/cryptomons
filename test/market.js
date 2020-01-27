@@ -36,12 +36,59 @@ contract("Market test", async accounts => {
     expect(parseInt(tx.logs[0].args._value, 10)).to.equal(value);
     expect(parseInt(tx.logs[0].args._tokenId, 10)).to.equal(tokenId);
   });
+  it("should let user unlist a listed token on market", async () => {
+    const tokenId = 1;
+    const value = 10000;
+    var prevSoldTokens = await market.getListedTokens.call({ from: minter });
+    prevSoldTokens = prevSoldTokens.map(x => parseInt(x, 10));
+    await cryptomon.approve(market.address, tokenId, { from: minter });
+    await market.listToken(tokenId, value);
+    const tx2 = await market.unlistToken(tokenId);
+    var soldTokens = await market.getListedTokens.call({ from: minter });
+    soldTokens = soldTokens.map(x => parseInt(x, 10));
+    var diffTokens = [];
+    soldTokens.forEach(token => {
+      if (!prevSoldTokens.includes(token)) diffTokens.push(token);
+    });
+
+    expect(diffTokens).to.deep.equal([]);
+    expect(tx2.logs[0].event).to.equal("Unlisted");
+    expect(tx2.logs[0].args._by).to.equal(minter);
+    expect(parseInt(tx2.logs[0].args._tokenId, 10)).to.equal(tokenId);
+  });
+
+  it("should error on user trying to unlist a non listed token on market", async () => {
+    const tokenId = 1;
+    try {
+      await market.unlistToken(tokenId);
+    } catch (error) {
+      expect(error.message).to.include(
+        "This token is not listed on the market"
+      );
+    }
+  });
+
+  it("should error when trying to unlist a token you do not own on the market", async () => {
+    const tokenId = 1;
+    const value = 100000;
+    await cryptomon.approve(market.address, tokenId, { from: minter });
+    await market.listToken(tokenId, value);
+    try {
+      await market.unlistToken(tokenId, { from: receiver });
+    } catch (error) {
+      expect(error.message).to.include(
+        "Trying to unlist a token you do not own"
+      );
+    }
+  });
 
   it("should not let user list a token that market is not approved on", async () => {
     try {
       await market.listToken(1, 10000, { from: minter });
     } catch (error) {
-      expect(error).to.include("The Market is not approved for this token");
+      expect(error.message).to.include(
+        "The Market is not approved for this token"
+      );
     }
   });
 

@@ -12,6 +12,7 @@ contract Market is ERC721Holder, Ownable {
         uint256 _tokenId
     );
     event Listed(address indexed _by, uint256 _value, uint256 _tokenId);
+    event Unlisted(address indexed _by, uint256 _tokenId);
     struct SellerInfo {
         address payable seller;
         uint256 price;
@@ -63,6 +64,27 @@ contract Market is ERC721Holder, Ownable {
         }
 
         emit Listed(msg.sender, price, tokenId);
+    }
+
+    function unlistToken(uint256 tokenId) public {
+        require(CMCisSet, "The CMContract address has not been set properly");
+        require(
+            sellers[tokenId].isSet,
+            "This token is not listed on the market"
+        );
+        require(
+            msg.sender == CMContract.ownerOf(tokenId) ||
+                CMContract.ownerOf(tokenId) == address(this),
+            "Trying to unlist a token you do not own"
+        );
+
+        sellers[tokenId] = SellerInfo(address(0), 0, false);
+        for (uint256 i = 0; i < listedTokens.length; i++) {
+            if (listedTokens[i] == tokenId) {
+                _deleteListedToken(i);
+            }
+        }
+        emit Unlisted(msg.sender, tokenId);
     }
 
     function _deleteListedToken(uint256 index) internal {
