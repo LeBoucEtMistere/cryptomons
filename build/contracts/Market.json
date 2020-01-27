@@ -13683,12 +13683,12 @@
         }
       },
       "links": {},
-      "address": "0x52F032bED4f1DD6e2333Dd068Df0b8078F88BA38",
-      "transactionHash": "0x14f062ea03da1131b84f3d3c3eb3a5dca4228eee7330601148c568776b642559"
+      "address": "0x5bcA7C67Cf680647339af71ffe35C1305c645Be8",
+      "transactionHash": "0x1570fd3de325e338d92fae62aab0d907d1e2e592995de3f6f2b621a10333d5b0"
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-01-27T14:48:25.155Z",
+  "updatedAt": "2020-01-27T16:52:46.014Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
