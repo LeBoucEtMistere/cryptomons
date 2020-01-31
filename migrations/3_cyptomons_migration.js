@@ -31,12 +31,12 @@ module.exports = async function(deployer, network, accounts) {
     await mint_one_of_each(cryptomonC, minter_address, marketplace_contract);
 
     // mint to p2
-    await mint_cryptomons(
-      cryptomonC,
-      minter_address,
-      accounts[1],
-      "initial_cryptomons.json"
-    );
+    // await mint_cryptomons(
+    //   cryptomonC,
+    //   minter_address,
+    //   accounts[1],
+    //   "initial_cryptomons.json"
+    // );
   } catch (error) {
     console.log(error);
   }

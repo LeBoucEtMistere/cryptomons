@@ -19800,13 +19800,13 @@
           "anonymous": false,
           "inputs": [
             {
-              "indexed": false,
+              "indexed": true,
               "internalType": "uint256",
               "name": "parent1",
               "type": "uint256"
             },
             {
-              "indexed": false,
+              "indexed": true,
               "internalType": "uint256",
               "name": "parent2",
               "type": "uint256"
@@ -19826,19 +19826,19 @@
           "anonymous": false,
           "inputs": [
             {
-              "indexed": false,
+              "indexed": true,
               "internalType": "uint256",
               "name": "tokenId",
               "type": "uint256"
             },
             {
-              "indexed": false,
+              "indexed": true,
               "internalType": "uint256",
               "name": "parent1",
               "type": "uint256"
             },
             {
-              "indexed": false,
+              "indexed": true,
               "internalType": "uint256",
               "name": "parent2",
               "type": "uint256"
@@ -19852,13 +19852,13 @@
           "anonymous": false,
           "inputs": [
             {
-              "indexed": false,
+              "indexed": true,
               "internalType": "uint256",
               "name": "parent1",
               "type": "uint256"
             },
             {
-              "indexed": false,
+              "indexed": true,
               "internalType": "uint256",
               "name": "parent2",
               "type": "uint256"
@@ -19873,11 +19873,49 @@
           "name": "Interrupted",
           "type": "event",
           "signature": "0xc4804913f67c7aa99b9fa6341f5defec4db503702653ba547bd50cc5849956d5"
+        },
+        "0x4789bdf25aeaa26a308a190533f86d5548f37b298f20e7af9299c3e946846c52": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "attacker",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "defender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "attacker_token",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "defender_token",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "win",
+              "type": "bool"
+            }
+          ],
+          "name": "Fighted",
+          "type": "event",
+          "signature": "0x4789bdf25aeaa26a308a190533f86d5548f37b298f20e7af9299c3e946846c52"
         }
       },
       "links": {},
-      "address": "0xd857760B7850224b81f5a7903c31AD8D183F1061",
-      "transactionHash": "0xa73c51a95afa72e866cc5ed10d4d5de7c751327679bc373db37f69cf29b2416b"
+      "address": "0x161714C8B27159Aa1278eaE4142B0BB2B783D452",
+      "transactionHash": "0x55bc4186fad50ee1781c70685690a7b23840145b9443576151fca35812a22969"
     },
     "5777": {
       "events": {
@@ -20917,7 +20955,7 @@
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-01-31T18:13:11.031Z",
+  "updatedAt": "2020-01-31T18:31:16.844Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
