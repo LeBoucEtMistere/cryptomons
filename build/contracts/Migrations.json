@@ -1417,12 +1417,12 @@
     "1580466592603": {
       "events": {},
       "links": {},
-      "address": "0xFc7d6f3c3B89421392BE7e041F96a90680DFBfd9",
-      "transactionHash": "0xc4b5e75a194a8924517d2a92505ce8e6b037350c568ab637064a3ed2959aed63"
+      "address": "0x2ABb2B32c831e02d31f4dE6201657e7487Eb6a1a",
+      "transactionHash": "0xc28c821f35ab0d8f8f678e30ab30f35fd0579d8479b38287aa11d99b6423ecd7"
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-01-31T11:41:49.297Z",
+  "updatedAt": "2020-01-31T18:13:11.074Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

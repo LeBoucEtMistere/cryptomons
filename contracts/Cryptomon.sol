@@ -79,6 +79,11 @@ contract Cryptomon is ERC721Full, Ownable {
         return breedingTokens;
     }
 
+    function hasHatched(uint256 cm1) public view returns (bool) {
+        require(breeders[cm1].isSet, "This cryptomon did not breed");
+        return now > breeders[cm1].endTime;
+    }
+
     function hasHatched(uint256 cm1, uint256 cm2) public view returns (bool) {
         require(breeders[cm1].isSet, "This cryptomon did not breed");
         require(breeders[cm2].isSet, "This cryptomon did not breed");
