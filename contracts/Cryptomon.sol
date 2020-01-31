@@ -13,9 +13,28 @@ contract Cryptomon is ERC721Full, Ownable {
         bool isSet;
     }
 
-    event Breeding(uint256 parent1, uint256 parent2, uint256 endTime);
-    event Interrupted(uint256 parent1, uint256 parent2, address by);
-    event Hatched(uint256 tokenId, uint256 parent1, uint256 parent2);
+    event Breeding(
+        uint256 indexed parent1,
+        uint256 indexed parent2,
+        uint256 endTime
+    );
+    event Interrupted(
+        uint256 indexed parent1,
+        uint256 indexed parent2,
+        address by
+    );
+    event Hatched(
+        uint256 indexed tokenId,
+        uint256 indexed parent1,
+        uint256 indexed parent2
+    );
+    event Fighted(
+        address attacker,
+        address defender,
+        uint256 attacker_token,
+        uint256 defender_token,
+        bool win
+    );
 
     uint256[] private breedingTokens;
     mapping(uint256 => BreedData) private breeders;
@@ -48,7 +67,7 @@ contract Cryptomon is ERC721Full, Ownable {
 
         if (receiver == address(market)) {
             emit Minted(true);
-            market.listToken(newItemId, 0.001 ether);
+            market.listToken(newItemId, 0.1 ether);
         } else {
             emit Minted(false);
         }
@@ -61,14 +80,6 @@ contract Cryptomon is ERC721Full, Ownable {
     }
 
     function hasHatched(uint256 cm1, uint256 cm2) public view returns (bool) {
-        require(
-            ownerOf(cm1) == msg.sender,
-            "Can only hatch cryptomons you own"
-        );
-        require(
-            ownerOf(cm2) == msg.sender,
-            "Can only hatch cryptomons you own"
-        );
         require(breeders[cm1].isSet, "This cryptomon did not breed");
         require(breeders[cm2].isSet, "This cryptomon did not breed");
         require(breeders[cm1].with == cm2, "These 2 are not breeding together");
@@ -138,6 +149,14 @@ contract Cryptomon is ERC721Full, Ownable {
     }
 
     function hatch(uint256 cm1, uint256 cm2) public {
+        require(
+            ownerOf(cm1) == msg.sender,
+            "Can only hatch cryptomons you own"
+        );
+        require(
+            ownerOf(cm2) == msg.sender,
+            "Can only hatch cryptomons you own"
+        );
         // all important verifications are done in hasHatched to avoid redoing it
         require(hasHatched(cm1, cm2), "This cryptomon is not hatched yet");
 
@@ -157,6 +176,42 @@ contract Cryptomon is ERC721Full, Ownable {
         _clearBreeding(cm1, cm2);
 
         emit Hatched(newItemId, cm1, cm2);
+
+    }
+
+    function fight(uint256 attacker, uint256 defender) public {
+        require(
+            ownerOf(attacker) == msg.sender,
+            "Can only attack with a cryptomon you own"
+        );
+        require(
+            ownerOf(defender) != msg.sender,
+            "Can only attack someone's else cryptomon"
+        );
+
+        uint256 random = uint256(blockhash(block.number - 1));
+        if (random % 2 == 0) {
+            // won
+            if (isBreeding(defender)) {
+                interruptBreeding(defender);
+            }
+            emit Fighted(
+                msg.sender,
+                ownerOf(defender),
+                attacker,
+                defender,
+                true
+            );
+        } else {
+            // lost
+            emit Fighted(
+                msg.sender,
+                ownerOf(defender),
+                attacker,
+                defender,
+                false
+            );
+        }
 
     }
 }

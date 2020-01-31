@@ -28,10 +28,13 @@ module.exports = async function(deployer, network, accounts) {
       "initial_cryptomons.json"
     );
     // mint crypto to market
+    await mint_one_of_each(cryptomonC, minter_address, marketplace_contract);
+
+    // mint to p2
     await mint_cryptomons(
       cryptomonC,
       minter_address,
-      marketplace_contract,
+      accounts[1],
       "initial_cryptomons.json"
     );
   } catch (error) {
@@ -66,4 +69,16 @@ async function mint_cryptomons(instance, from, to, file_name) {
   });
   // waiting for all promises to end
   await Promise.all(promises);
+}
+
+async function mint_one_of_each(instance, from, to) {
+  const promises = [];
+  const baseURI = "https://morning-springs-53559.herokuapp.com/cryptomon/meta/";
+  for (i = 141; i <= 151; i++) {
+    promises.push(
+      instance.createCryptomon(to, baseURI + i.toString(), {
+        from: from
+      })
+    );
+  }
 }

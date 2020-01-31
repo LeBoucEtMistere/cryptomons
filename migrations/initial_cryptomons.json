@@ -2,24 +2,40 @@
   "baseURI": "https://morning-springs-53559.herokuapp.com/cryptomon/meta/",
   "tokens": [
     {
-      "number": 4,
+      "number": 2,
       "uri_suffix": "1"
     },
     {
-      "number": 4,
+      "number": 2,
       "uri_suffix": "2"
     },
     {
-      "number": 4,
+      "number": 2,
       "uri_suffix": "3"
     },
     {
-      "number": 4,
+      "number": 2,
       "uri_suffix": "4"
     },
     {
-      "number": 4,
+      "number": 2,
       "uri_suffix": "5"
+    },
+    {
+      "number": 2,
+      "uri_suffix": "6"
+    },
+    {
+      "number": 2,
+      "uri_suffix": "7"
+    },
+    {
+      "number": 2,
+      "uri_suffix": "8"
+    },
+    {
+      "number": 2,
+      "uri_suffix": "9"
     }
   ]
 }
