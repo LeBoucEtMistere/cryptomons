@@ -13496,6 +13496,111 @@
     "version": "0.5.12+commit.7709ece9.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {
+        "0x6e16e8064e3c8254cef11e01e152416398602d7e8785f743f1c2f93a9a15ff35": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "_by",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            }
+          ],
+          "name": "Listed",
+          "type": "event",
+          "signature": "0x6e16e8064e3c8254cef11e01e152416398602d7e8785f743f1c2f93a9a15ff35"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        },
+        "0x16dd16959a056953a63cf14bf427881e762e54f03d86b864efea8238dd3b822f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "_from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "_to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            }
+          ],
+          "name": "Sold",
+          "type": "event",
+          "signature": "0x16dd16959a056953a63cf14bf427881e762e54f03d86b864efea8238dd3b822f"
+        },
+        "0xd1b3de83f2e838a8b6eb09447f2316d7bfd1a64d0059abe8f1160f490616fd83": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "_by",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            }
+          ],
+          "name": "Unlisted",
+          "type": "event",
+          "signature": "0xd1b3de83f2e838a8b6eb09447f2316d7bfd1a64d0059abe8f1160f490616fd83"
+        }
+      },
+      "links": {},
+      "address": "0x3683C7a0F27080d7697ed9011D266f9ae4eBc20C",
+      "transactionHash": "0xbc4d636a81950804da2d243093f7662faf1b5e33aeeaa00a7f4e447dd32df7df"
+    },
     "4": {
       "events": {
         "0x6e16e8064e3c8254cef11e01e152416398602d7e8785f743f1c2f93a9a15ff35": {
@@ -13598,8 +13703,8 @@
         }
       },
       "links": {},
-      "address": "0x42b5C0EA64553d340dA1A3514BAEE3EB3Ba273A7",
-      "transactionHash": "0x9ab1547b8c8dab74615cbecfadf583f7629edcfd90ac11aaeb4ebb4f8fc8ebdc"
+      "address": "0x88022ce5792aC24C74b2f63Bc3AD72812D10f24b",
+      "transactionHash": "0xebb23dc627a55fd783a433c5a942a598a3a2a56d7a6b5d05d066ce85c135d7ac"
     },
     "5777": {
       "events": {
@@ -14023,7 +14128,7 @@
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2020-01-31T18:31:16.865Z",
+  "updatedAt": "2020-02-05T22:26:27.283Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

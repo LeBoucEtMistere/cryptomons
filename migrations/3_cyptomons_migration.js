@@ -74,7 +74,7 @@ async function mint_cryptomons(instance, from, to, file_name) {
 async function mint_one_of_each(instance, from, to) {
   const promises = [];
   const baseURI = "https://morning-springs-53559.herokuapp.com/cryptomon/meta/";
-  for (i = 141; i <= 151; i++) {
+  for (i = 131; i <= 151; i++) {
     promises.push(
       instance.createCryptomon(to, baseURI + i.toString(), {
         from: from
