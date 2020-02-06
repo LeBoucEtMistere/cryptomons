@@ -10,7 +10,9 @@ contract("Cryptomon test", async accounts => {
     cryptomon = await Cryptomon.deployed();
   });
   it("should be able to mint Cryptomons to account", async () => {
-    const tx = await cryptomon.createCryptomon(receiver, "1", { from: minter });
+    const tx = await cryptomon.createCryptomon(receiver, "1", 0, {
+      from: minter
+    });
     expect(tx.logs[0].event).to.equal("Transfer");
     expect(tx.logs[0].args.from).to.equal(
       "0x0000000000000000000000000000000000000000"
@@ -20,9 +22,14 @@ contract("Cryptomon test", async accounts => {
     expect(tx.logs[1].args._toMarket).to.equal(false);
   });
   it("should be able to mint Cryptomons to market", async () => {
-    const tx = await cryptomon.createCryptomon(Market.address, "1", {
-      from: minter
-    });
+    const tx = await cryptomon.createCryptomon(
+      Market.address,
+      "1",
+      10000000000000,
+      {
+        from: minter
+      }
+    );
     expect(tx.logs[0].event).to.equal("Transfer");
     expect(tx.logs[0].args.from).to.equal(
       "0x0000000000000000000000000000000000000000"

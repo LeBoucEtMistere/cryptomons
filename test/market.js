@@ -37,7 +37,7 @@ contract("Market test", async accounts => {
     expect(parseInt(tx.logs[0].args._tokenId, 10)).to.equal(tokenId);
   });
   it("should let user unlist a listed token on market", async () => {
-    const tokenId = 1;
+    const tokenId = 12;
     const value = 10000;
     var prevSoldTokens = await market.getListedTokens.call({ from: minter });
     prevSoldTokens = prevSoldTokens.map(x => parseInt(x, 10));
@@ -84,7 +84,7 @@ contract("Market test", async accounts => {
 
   it("should not let user list a token that market is not approved on", async () => {
     try {
-      await market.listToken(1, 10000, { from: minter });
+      await market.listToken(13, 10000, { from: minter });
     } catch (error) {
       expect(error.message).to.include(
         "The Market is not approved for this token"
@@ -103,7 +103,7 @@ contract("Market test", async accounts => {
   });
 
   it("should let user buy a valid token", async () => {
-    const tokenId = 1;
+    const tokenId = 14;
     const value = 10000000000000;
 
     // save balances

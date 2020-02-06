@@ -6,6 +6,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./Market.sol";
 
 contract Cryptomon is ERC721Full, Ownable {
+    // struct
     struct BreedData {
         uint256 with;
         uint256 startTime;
@@ -13,6 +14,7 @@ contract Cryptomon is ERC721Full, Ownable {
         bool isSet;
     }
 
+    //events
     event Breeding(
         uint256 indexed parent1,
         uint256 indexed parent2,
@@ -36,16 +38,18 @@ contract Cryptomon is ERC721Full, Ownable {
         bool win
     );
 
+    event Minted(bool _toMarket);
+
+    //variables
     uint256[] private breedingTokens;
     mapping(uint256 => BreedData) private breeders;
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    event Minted(bool _toMarket);
-
     Market private market;
 
+    //functions
     constructor(address _market)
         public
         ERC721Full("Cryptomon", "CM")
@@ -54,11 +58,12 @@ contract Cryptomon is ERC721Full, Ownable {
         market = Market(_market);
     }
 
-    function createCryptomon(address receiver, string memory tokenURI)
-        public
-        onlyOwner()
-        returns (uint256)
-    {
+    function createCryptomon(
+        address receiver,
+        string memory tokenURI,
+        uint256 price
+    ) public onlyOwner() returns (uint256) {
+        // price is only used when minting to the market to set initial price
         _tokenIds.increment();
 
         uint256 newItemId = _tokenIds.current();
@@ -67,13 +72,22 @@ contract Cryptomon is ERC721Full, Ownable {
 
         if (receiver == address(market)) {
             emit Minted(true);
-            market.listToken(newItemId, 0.1 ether);
+            market.listToken(newItemId, price);
         } else {
             emit Minted(false);
         }
 
         return newItemId;
     }
+
+    // function sellOnMarket(uint256 tokenId, uint256 price) public {
+    //     require(
+    //         msg.sender == ownerOf(tokenId),
+    //         "you cannot sell a token you do not own"
+    //     );
+    //     approve(address(market), tokenId);
+    //     market.listToken(tokenId, price);
+    // }
 
     function getBreedingTokens() public view returns (uint256[] memory) {
         return breedingTokens;

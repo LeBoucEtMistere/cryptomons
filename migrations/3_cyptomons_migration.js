@@ -2,6 +2,7 @@ const Cryptomon = artifacts.require("Cryptomon");
 const Market = artifacts.require("Market");
 const fs = require("fs").promises;
 const path = require("path");
+const web3 = require("web3");
 
 var minter_address = "";
 var marketplace_contract = Market.address;
@@ -30,7 +31,7 @@ module.exports = async function(deployer, network, accounts) {
     // mint crypto to market
     await mint_one_of_each(cryptomonC, minter_address, marketplace_contract);
 
-    // mint to p2
+    //mint to p2
     // await mint_cryptomons(
     //   cryptomonC,
     //   minter_address,
@@ -61,7 +62,7 @@ async function mint_cryptomons(instance, from, to, file_name) {
     for (i = 0; i < token.number; i++) {
       // we add a new promise from the minting of a new token to the market
       promises.push(
-        instance.createCryptomon(to, baseURI + token.uri_suffix, {
+        instance.createCryptomon(to, baseURI + token.uri_suffix, 1, {
           from: from
         })
       );
@@ -76,9 +77,14 @@ async function mint_one_of_each(instance, from, to) {
   const baseURI = "https://morning-springs-53559.herokuapp.com/cryptomon/meta/";
   for (i = 131; i <= 151; i++) {
     promises.push(
-      instance.createCryptomon(to, baseURI + i.toString(), {
-        from: from
-      })
+      instance.createCryptomon(
+        to,
+        baseURI + i.toString(),
+        new web3.utils.BN("100000000000000000"),
+        {
+          from: from
+        }
+      )
     );
   }
 }
