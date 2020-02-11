@@ -80,15 +80,6 @@ contract Cryptomon is ERC721Full, Ownable {
         return newItemId;
     }
 
-    // function sellOnMarket(uint256 tokenId, uint256 price) public {
-    //     require(
-    //         msg.sender == ownerOf(tokenId),
-    //         "you cannot sell a token you do not own"
-    //     );
-    //     approve(address(market), tokenId);
-    //     market.listToken(tokenId, price);
-    // }
-
     function getBreedingTokens() public view returns (uint256[] memory) {
         return breedingTokens;
     }
